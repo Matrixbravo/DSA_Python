@@ -55,6 +55,14 @@ tests.append({
     'output': 7
 })
 
+tests.append({
+    'input': {
+        'cards': [],
+        'query': 3
+    },
+    'output': 7
+})
+
 # Linear Search (Brute force)
 
 # 1.) Create a variable position with the value 0.
@@ -68,7 +76,7 @@ def locate_card(cards, query):
   # Create a variable position with the value 0
   position = 0
   # Set up a loop for repetition
-  while True:
+  while position < len(cards):
     # Check if the element at the current postion matche the query
     if cards[position] == query:
       #Answer found! Return and exit
@@ -81,7 +89,8 @@ def locate_card(cards, query):
     if position == len(cards):
       # Number not found, Return -1
       return -1
-
+    
+  return "Empty List"
 
 
 # Use this run_tests() function for all other test run cases to check pass and failed
@@ -89,7 +98,9 @@ def locate_card(cards, query):
 import time
 
 def run_tests():
-    total_execution_time = 5
+    total_execution_time = 0
+    passed_tests = 0
+    failed_tests = 0
 
     for i, test in enumerate(tests, 1):
         input_data = test['input']
@@ -102,11 +113,14 @@ def run_tests():
         total_execution_time += end_time - start_time
 
         if result == expected_output:
-            print(f'Test case {i}: Passed (Execution Time: {end_time - start_time:.6f} seconds)')
+            passed_tests += 1
+            print(f'\033[92mTest case {i}: Passed (Execution Time: {end_time - start_time:.9f} seconds)\033[0m')
         else:
-            print(f'Test case {i}: Failed. Expected {expected_output}, got {result}')
+            failed_tests += 1
+            print(f'\033[91mTest case {i}: Failed. Expected {expected_output}, got {result} (Execution Time: {end_time - start_time:.9f} seconds)\033[0m')
 
-    print(f'Test case {i}: Passed (Execution Time: {end_time - start_time:.9f} seconds)')
+    print(f'\nTotal Execution Time for all test cases: {total_execution_time:.9f} seconds')
+    print(f'Total Passed: \033[92m{passed_tests}\033[0m, Total Failed: \033[91m{failed_tests}\033[0m')
 
 # Run the tests
 run_tests()
