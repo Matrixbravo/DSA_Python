@@ -60,7 +60,7 @@ tests.append({
         'cards': [],
         'query': 3
     },
-    'output': 7
+    'output': -1
 })
 
 # Linear Search (Brute force)
@@ -90,7 +90,7 @@ def locate_card(cards, query):
       # Number not found, Return -1
       return -1
     
-  return "Empty List"
+  return -1
 
 
 # Use this run_tests() function for all other test run cases to check pass and failed
@@ -98,7 +98,7 @@ def locate_card(cards, query):
 import time
 
 def run_tests():
-    total_execution_time = 0
+    total_execution_time = 5
     passed_tests = 0
     failed_tests = 0
 
@@ -110,17 +110,18 @@ def run_tests():
         result = locate_card(**input_data)
         end_time = time.time()
 
-        total_execution_time += end_time - start_time
+        total_execution_time += (end_time - start_time) * 1000  # Convert to milliseconds
 
         if result == expected_output:
             passed_tests += 1
-            print(f'\033[92mTest case {i}: Passed (Execution Time: {end_time - start_time:.9f} seconds)\033[0m')
+            print(f'\033[92mTest case {i}: Passed (Execution Time: {(end_time - start_time) * 1000:.6f} ms)\033[0m')
         else:
             failed_tests += 1
-            print(f'\033[91mTest case {i}: Failed. Expected {expected_output}, got {result} (Execution Time: {end_time - start_time:.9f} seconds)\033[0m')
+            print(f'\033[91mTest case {i}: Failed. Expected {expected_output}, got {result} (Execution Time: {(end_time - start_time) * 1000:.6f} ms)\033[0m')
 
-    print(f'\nTotal Execution Time for all test cases: {total_execution_time:.9f} seconds')
+    print(f'\nTotal Execution Time for all test cases: {total_execution_time:.6f} ms')
     print(f'Total Passed: \033[92m{passed_tests}\033[0m, Total Failed: \033[91m{failed_tests}\033[0m')
 
 # Run the tests
 run_tests()
+
