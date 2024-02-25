@@ -86,18 +86,27 @@ def locate_card(cards, query):
 
 # Use this run_tests() function for all other test run cases to check pass and failed
 
+import time
+
 def run_tests():
-  for i, test in enumerate(tests, 1):
-    input_data = test['input']
-    expected_output = test['output']
+    total_execution_time = 5
 
-    result = locate_card(**input_data)
+    for i, test in enumerate(tests, 1):
+        input_data = test['input']
+        expected_output = test['output']
 
-    if result == expected_output:
-      print(f'Test case {i}: Passed')
-    else:
-      print(f'Test case {i}: Failed. Expected {expected_output}, got {result}')
+        start_time = time.time()
+        result = locate_card(**input_data)
+        end_time = time.time()
 
+        total_execution_time += end_time - start_time
+
+        if result == expected_output:
+            print(f'Test case {i}: Passed (Execution Time: {end_time - start_time:.6f} seconds)')
+        else:
+            print(f'Test case {i}: Failed. Expected {expected_output}, got {result}')
+
+    print(f'Test case {i}: Passed (Execution Time: {end_time - start_time:.9f} seconds)')
 
 # Run the tests
 run_tests()
